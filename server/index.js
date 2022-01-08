@@ -1,44 +1,34 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const pool = require('./config/db_config');
+//The routes
+const products = require('./routes/products');
+const stocks = require('./routes/stocks');
+const management = require('./routes/management');
+
+
 const app = express();
-const path = require('path')
+app.use(cors());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
- app.use(express.static('../client'))
- 
-//Login page
-app.get('/', function(req,res){
-    res.sendFile(path.resolve('../client/login.html'))
-    //res.status(200).send('Login Form');
-})
-/*****************  Saler Interfaces **************/
-// Products Management
-//Stock Management
-//Statistical Reports
-/**************************************************/
+app.use('/products', products);
+app.use('/stocks', stocks);
+app.use('/management', management);
 
 
-
-/*****************  Viewer Interfaces **************/
-// Products Page
-app.get('/products', function(req,res){
-    res.status(200).send('products page');
-})
-//Market Page
-app.get('/market', function(req,res){
-    res.status(200).send('market page');
-})
-/*************************************************/
+// simple routes
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to marketplace application." });
+});
 
 
-/** Handle any other route**/
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 
-app.all('*', (req,res) =>{
-    res.status(404).send(`<h1> 404 Error: Page not found <h1>`)
-})
-
-
-var server = app.listen(5001, function (){
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log("Listening at http://%s:%s",host,port)
-})
