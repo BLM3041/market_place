@@ -1,14 +1,14 @@
 <template>
-  <login> </login> 
+  <sellerPage/> 
 </template>
 
 <script>
-import login from './components/login.vue'
+import sellerPage from './components/sellerPage.vue'
 
 export default {
   name: 'App',
   components: {
-    login
+    sellerPage
   }
 }
 </script>
@@ -27,11 +27,10 @@ body {
    position: absolute;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
 }
+
 </style>
