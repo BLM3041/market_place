@@ -1,21 +1,21 @@
 <template>
         <div class="container">
             
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Product Operations</button>
-            <button type="button" class="btn">Sale Operations</button>
-        </div>   
+            <button type="button" class="btn">Daily</button>
+            <button type="button" class="btn">Weekly</button>
+            <button type="button" class="btn">Monthly</button>
+        </div>
+        <div class="col-8" id="chartdiv"></div>   
 </template>
 
 <script>
 
 export default{
-    name:'sellerPage'
+    name:'reports'
 }
 </script>
 
 <style scoped>
-
     .container{
         display: flex;
         align-items: center;
@@ -34,5 +34,8 @@ export default{
     }
     button:hover{
         cursor: pointer;
+    }
+    .col-8{
+        height: 300px;
     }
 </style>

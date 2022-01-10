@@ -1,14 +1,15 @@
 <template>
-  <sellerPage/> 
+  <products/> 
 </template>
 
 <script>
-import sellerPage from './components/sellerPage.vue'
-
+//import sellerPage from './components/sellerPage.vue'
+//import statePage from './components/statePage.vue'
+import products from './components/products.vue'
 export default {
   name: 'App',
   components: {
-    sellerPage
+    products
   }
 }
 </script>

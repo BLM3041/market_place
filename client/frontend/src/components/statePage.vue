@@ -1,28 +1,23 @@
 <template>
-        <div class="container">
-            
+    <div class="container">
             <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Product Operations</button>
-            <button type="button" class="btn">Sale Operations</button>
-        </div>   
+            <button type="button" class="btn">Seller Oparetions</button>
+    </div> 
+    
 </template>
 
 <script>
 
 export default{
-    name:'sellerPage'
+    name:'statePage'
 }
 </script>
-
 <style scoped>
-
     .container{
         display: flex;
         align-items: center;
-        justify-content: center;
-        height: 100%;
+        justify-content: center; 
     }
-
     button{
         width:180px;
         height:180px;
