@@ -3,15 +3,15 @@
         <caption>PRODUCTS</caption>
         <tbody>
             <tr>
-                something some  Quantity: 30 <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
+                something some <img v-bind:src="require('../assets/' + minus)" />
             </tr>       
 
             <tr>
-                Anysomething   Quantity: 30  <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
+                Anysomething <img v-bind:src="require('../assets/' + minus)" />
             </tr>
 
             <tr>
-                some  Quantity: 30  <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
+                some <img v-bind:src="require('../assets/' + minus)" />
             </tr>    
         </tbody>
     </table>
@@ -20,10 +20,9 @@
 <script>
 
 export default{
-    name:'products',
+    name:'deleteProducts',
     data: function() {
         return {
-        plus: "plus.png",
         minus: "minus.png"
         };
     }

@@ -1,15 +1,19 @@
 <template>
-  <products/> 
+  <addSellerPopUp/> 
 </template>
 
 <script>
 //import sellerPage from './components/sellerPage.vue'
 //import statePage from './components/statePage.vue'
-import products from './components/products.vue'
+//import products from './components/products.vue'
+//import productOperations from './components/productOperations.vue'
+//import deleteProducts from './components/deleteProducts.vue'
+//import sellerOperations from './components/sellerOperations.vue'
+import addSellerPopUp from './components/addSellerPopUp.vue'
 export default {
   name: 'App',
   components: {
-    products
+    addSellerPopUp
   }
 }
 </script>
