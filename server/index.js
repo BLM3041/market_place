@@ -7,7 +7,7 @@ const path = require('path');
 //The routes
 const products = require('./routes/products');
 const stocks = require('./routes/stocks');
-const users = require('./routes/users');
+const login = require('./routes/login');
 const management = require('./routes/management');
 const history = require ('connect-history-api-fallback');
 
@@ -25,6 +25,7 @@ app.use('/products', products);
 app.use('/stocks', stocks);
 app.use('/management', management);
 
+app.use('/', login);
 
 // simple routes
 app.get("/", (req, res) => {

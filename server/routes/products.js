@@ -11,8 +11,14 @@ router.get("/:id", async (req, res) => {
     const product = await pool.query("SELECT * FROM list_one_product($1)", [
       id
     ]);
-7
-    res.json(product.rows[0]);
+    const product_name = product.rows[0]['list_one_product'];
+    if(product_name == null){
+      res.status(404).json("Product was not found!");
+    }
+    else{
+      res.status(200).json(product_name);
+    }
+   
   } catch (err) {
     console.error(err.message);
   }
@@ -23,7 +29,7 @@ router.get("/:id", async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const allProducts = await pool.query("SELECT * FROM list_all_products ()");
-    res.json(allProducts.rows);
+    res.status(200).json(allProducts.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -33,11 +39,18 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { product_name } = req.body;
-    console.log(product_name);
     const newProduct = await pool.query(
       `SELECT * from add_product($1)`,
-      [product_name]);
-    res.json(newProduct.rows[0]);
+      [product_name.toLowerCase()]);
+    console.log( [newProduct.rows[0]])
+    new_id = [newProduct.rows[0]['productid']]
+    if( new_id == -1){
+        res.status(409).json("Product already exists")
+    }
+    else{
+      res.status(200).json(`Product was successfully added with id: ${new_id}`);
+    }
+    
   } catch (err) {
     console.error(err.message);
   }
