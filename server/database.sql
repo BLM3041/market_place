@@ -469,6 +469,7 @@ begin
     where
         st.seller_id = s.id
         and l.seller_id = s.id
+        and st.product_id = productId
         and st.quantity > 0;
 end;
 $$

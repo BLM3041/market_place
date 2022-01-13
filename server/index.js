@@ -10,7 +10,7 @@ const products = require('./routes/products');
 const sellers = require('./routes/sellers');
 const login = require('./routes/login');
 const management = require('./routes/management');
-
+const browse = require('./routes/browse.js')
 
 //Express and Configuration
 const app = express();
@@ -25,6 +25,7 @@ app.use('/products', products);
 app.use('/sellers', sellers);
 app.use('/management', management);
 app.use('/login', login);
+app.use('/browse', browse);
 
 // simple routes
 app.get("/", (req, res) => {

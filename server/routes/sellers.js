@@ -39,7 +39,7 @@ router.get('/:sellerId/productsNotInStock', async (req, res) => {
 
 // Add a new product to the stock
 /**********************************************Check it ************************************************** */
-/**Does not gþcew warning for negative senario */
+/**Does not give warning for negative senario */
 router.post('/:sellerId/addStock', async (req, res) => {
   const { sellerId } = req.params;
   const product_id = req.body.product_id;
@@ -95,7 +95,7 @@ router.delete('/:sellerId/deleteFromStock', async (req, res) => {
 
 
 // Delete a product from the stock
-router.put('/:sellerId/updateStock', async (req, res) => {
+router.post('/:sellerId/updateStock', async (req, res) => {
   try {
     const { seller_id } = req.params;
     const product_id = req.body.product_id;
@@ -115,4 +115,21 @@ router.put('/:sellerId/updateStock', async (req, res) => {
     console.log(err.message);
   }
 });
+
+
+// Get reports
+router.get('/:sellerId/reports/', async (req, res) => {
+  try {
+    const { seller_id } = req.params;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    const reports = await pool.query("SELECT * FROM list_sales_usr($1,$2,$3)", 
+    [seller_id, startDate, endDate]);
+    res.json(reports.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+
 module.exports = router;
