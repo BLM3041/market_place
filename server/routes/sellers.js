@@ -131,5 +131,21 @@ router.get('/:sellerId/reports/', async (req, res) => {
   }
 });
 
+router.post('/:sellerId/sell/', async (req, res) => {
+  try {
+    const { sellerId } = req.params;
+    const product_id = req.body.product_id;
+    const quantity = req.body.quantity;
+    const sold = await pool.query("SELECT * FROM sell($1,$2,$3)", 
+    [sellerId, product_id, quantity]);
+    console.log(sold)
+    res.json(sold.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+
+
 
 module.exports = router;
