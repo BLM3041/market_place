@@ -11,17 +11,32 @@ router.get("/sellers/:id", async (req, res) => {
     const seller = await pool.query("SELECT * FROM seller WHERE id = $1", [
       id
     ]);
-
-    res.json(seller.rows[0]);
+    if(seller.rowCount){
+      res.json(seller.rows[0]);
+    }
+    else{
+      res.status(404).json(`Seller with id = ${id} could not be found`);
+    }
   } catch (err) {
     console.error(err.message);
   }
 });
+
+
 // Get all sellers
 router.get('/sellers/', async (req, res) => {
   try {
     const allSellers = await pool.query("SELECT * FROM seller");
     res.json(allSellers.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+// Get all market_user
+router.get('/users/', async (req, res) => {
+  try {
+    const allUsers = await pool.query("SELECT * FROM market_user");
+    res.json(allUsers.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -37,6 +52,7 @@ router.post('/sellers/', async (req, res) => {
       "SELECT * FROM add_user($1, $2, $3 , $4, $5)", 
       [username.toLowerCase(), hashed_password, loc, fname.toLowerCase() , surname.toLowerCase()]
     );
+    console.log(newSeller)
     res.json(newSeller.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -50,6 +66,7 @@ router.delete('/sellers/:id', async (req, res) => {
     const deleteSeller = await pool.query(" SELECT * FROM remove_user ($1) ", [
       id
     ]);
+    const deletdId = deleteSeller;
     res.json(deleteSeller);
   } catch (err) {
     console.log(err.message);

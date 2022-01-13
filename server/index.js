@@ -6,7 +6,7 @@ const path = require('path');
 
 //The routes
 const products = require('./routes/products');
-const stocks = require('./routes/stocks');
+const sellers = require('./routes/sellers');
 const login = require('./routes/login');
 const management = require('./routes/management');
 const history = require ('connect-history-api-fallback');
@@ -22,10 +22,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use('/products', products);
-app.use('/stocks', stocks);
+app.use('/sellers', sellers);
 app.use('/management', management);
 
-app.use('/', login);
+app.use('/login', login);
 
 // simple routes
 app.get("/", (req, res) => {

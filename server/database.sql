@@ -1,4 +1,5 @@
 /* TRIGGER PROCs */
+/*
 create or replace function is_occupied_proc ()
     returns trigger
     as $$
@@ -27,8 +28,9 @@ end;
 $$
 language 'plpgsql';
 
-
+*/
 /* TRIGGERS */
+/*
 create or replace trigger is_occupied
     before update on location for each row
     execute procedure is_occupied_proc ();
@@ -37,9 +39,9 @@ create or replace trigger pos_quantity
     before update on stock for each row
     execute procedure pos_quantity_proc ();
 
-
+*/
 /* TYPES - RECORDS */
-do $$
+/*do $$
 begin
     if not exists (
         select
@@ -56,8 +58,8 @@ end if;
 end
 $$;
 
-
-/* SEQUENCES */
+*/
+/* SEQUENCES 
 create sequence if not exists productid_seq;
 
 create sequence if not exists sellerid_seq;
@@ -65,7 +67,7 @@ create sequence if not exists sellerid_seq;
 create sequence if not exists saleid_seq;
 
 
-/* TABLES */
+/* TABLES 
 create table if not exists seller (
     id int primary key,
     seller_name varchar(200),
@@ -107,7 +109,7 @@ create table if not exists market_user (
 );
 
 
-/* SET n LOCATIONS WITH THEIR IDS */
+/* SET n LOCATIONS WITH THEIR IDS
 create or replace function init_locations (n int)
     returns void
     as $$
@@ -131,12 +133,12 @@ $$
 language 'plpgsql';
 
 
-/* initialize locations */
+/* initialize locations 
 select
     init_locations (100);
 
 
-/* VIEWS */
+/* VIEWS 
 create or replace view sellers_loc as
 select
     s.id as sellerid,
@@ -152,6 +154,7 @@ where
 
 /* FUNCTIONS */
 /* ==adding entities== */
+/*
 create or replace function add_product (name varchar(200), out productId int)
 as $$
 declare
@@ -170,6 +173,8 @@ end;
 
 $$
 language 'plpgsql';
+*/
+
 
 create or replace function add_stock (sellerId int, productId int, quant int, pr real)
     returns int
@@ -456,11 +461,16 @@ language 'plpgsql';
 
 
 /* ==routines== */
-create or replace function mylogin (username varchar(200), password varchar(200))
+create or replace function mylogin (username varchar(200), pass varchar(200))
     returns int
     as $$
 declare
     sellerid bigint;
+    v_state   TEXT;
+    v_msg     TEXT;
+    v_detail  TEXT;
+    v_hint    TEXT;
+    v_context TEXT;
 begin
     sellerid := (
         select
@@ -471,14 +481,25 @@ begin
         where
             market_user.seller_id = seller.id
             and market_user.id = username
-            and market_user.password = password);
+            and market_user.password = pass);
     if sellerid is null then
         return - 1;
     end if;
     return sellerid;
 exception
     when others then
-        return - 1;
+        get stacked diagnostics v_state = returned_sqlstate,
+        v_msg = message_text,
+        v_detail = pg_exception_detail,
+        v_hint = pg_exception_hint,
+        v_context = pg_exception_context;
+    raise notice E'Got exception:
+        state  : %
+        message: %
+        detail : %
+        hint   : %
+        context: %', v_state, v_msg, v_detail, v_hint, v_context;
+    return - 1;
 end;
 
 $$
