@@ -311,6 +311,8 @@ begin
             stock.product_id
         from
             stock
+        where
+            stock.seller_id = sellerId
 )
     select
         p.id,
@@ -529,7 +531,7 @@ begin
     update
         stock
     set
-        stock.quantity = curr_quantity
+        quantity = curr_quantity
     where
         stock.seller_id = sellerId
         and stock.product_id = productId;
