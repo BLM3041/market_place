@@ -6,7 +6,7 @@
                 <option value="seller">Seller</option>
             </select><br><br>
             <input type="text" id="username" name="username" placeholder="Username"><br>
-            <input type="text" id="password" name="password" placeholder="Password"><br><br>
+            <input type="password" id="password" name="password" placeholder="Password"><br><br>
             <input type="submit" value="Submit">
         </form>
     </div>

@@ -45,7 +45,7 @@ router.post('/:sellerId/addStock', async (req, res) => {
   const product_id = req.body.product_id;
   const quantity = req.body.quantity;
   const price = req.body.price;
-  console.log(req.body)
+  console.log(sellerId, product_id,quantity,price )
   try {
     const newStock = await pool.query(
       `SELECT * FROM add_stock ($1, $2, $3, $4)`,
