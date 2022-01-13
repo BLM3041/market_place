@@ -1,40 +1,3 @@
-/* TRIGGER PROCs */
-
-create or replace function is_occupied_proc ()
-    returns trigger
-    as $$
-begin
-    if new.seller_id is null then
-        return new;
-    end if;
-    if old.seller_id is not null then
-        raise exception 'location is already occupied';
-        return old;
-    else
-        return new;
-    end if;
-end;
-$$
-language 'plpgsql';
-
-create or replace function pos_quantity_proc ()
-    returns trigger
-    as $$
-begin
-    if old.quantity < 0 then
-        raise exception 'quantity cannot be negative';
-        return old;
-    else
-        return new;
-    end if;
-end;
-$$
-language 'plpgsql';
-
-/* TRIGGERS */
-create or replace trigger is_occupied before update on location for each row execute procedure is_occupied_proc ();
-
-create or replace trigger pos_quantity before update on stock for each row execute procedure pos_quantity_proc ();
 
 /* TYPES - RECORDS */
 do $$
@@ -104,6 +67,43 @@ create table if not exists market_user (
     seller_id int references seller (id) on delete cascade
 );
 
+/* TRIGGER PROCs */
+
+create or replace function is_occupied_proc ()
+    returns trigger
+    as $$
+begin
+    if new.seller_id is null then
+        return new;
+    end if;
+    if old.seller_id is not null then
+        raise exception 'location is already occupied';
+        return old;
+    else
+        return new;
+    end if;
+end;
+$$
+language 'plpgsql';
+
+create or replace function pos_quantity_proc ()
+    returns trigger
+    as $$
+begin
+    if old.quantity < 0 then
+        raise exception 'quantity cannot be negative';
+        return old;
+    else
+        return new;
+    end if;
+end;
+$$
+language 'plpgsql';
+
+/* TRIGGERS */
+create or replace trigger is_occupied before update on location for each row execute procedure is_occupied_proc ();
+
+create or replace trigger pos_quantity before update on stock for each row execute procedure pos_quantity_proc ();
 
 /* SET n LOCATIONS WITH THEIR IDS */
 create or replace function init_locations (n int)

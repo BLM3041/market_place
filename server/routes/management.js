@@ -3,7 +3,7 @@ const pool = require("../config/db_config");
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 
-//get a seller
+//Get a seller
 
 router.get("/sellers/:id", async (req, res) => {
   try {
@@ -21,6 +21,7 @@ router.get("/sellers/:id", async (req, res) => {
     console.error(err.message);
   }
 });
+//Get a user
 router.get("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -57,7 +58,7 @@ router.get('/users/', async (req, res) => {
   }
 });
 
-// Add a seller
+// Add a seller (user)
 router.post('/sellers/', async (req, res) => {
   try {
     const { username, password, loc, fname, surname } = req.body;
