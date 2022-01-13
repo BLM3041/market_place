@@ -37,7 +37,7 @@ create or replace trigger is_occupied before update on location for each row exe
 create or replace trigger pos_quantity before update on stock for each row execute procedure pos_quantity_proc ();
 
 /* TYPES - RECORDS */
-/*do $$
+do $$
 begin
     if not exists (
         select
@@ -54,8 +54,8 @@ end if;
 end
 $$;
 
-*/
-/* SEQUENCES 
+
+/* SEQUENCES */
 create sequence if not exists productid_seq;
 
 create sequence if not exists sellerid_seq;
@@ -63,7 +63,7 @@ create sequence if not exists sellerid_seq;
 create sequence if not exists saleid_seq;
 
 
-/* TABLES 
+/* TABLES */
 create table if not exists seller (
     id int primary key,
     seller_name varchar(200),
@@ -132,12 +132,12 @@ $$
 language 'plpgsql';
 
 
-/* initialize locations 
+/* initialize locations */
 select
     init_locations (100);
 
 
-/* VIEWS 
+/* VIEWS */
 create or replace view sellers_loc as
 select
     s.id as sellerid,
@@ -151,8 +151,6 @@ where
     s.id = l.seller_id;
 
 
-/* FUNCTIONS */
-/* ==adding entities== */
 	
 /* FUNCTIONS */	
 /* ==adding entities== */	
@@ -480,6 +478,7 @@ create or replace function mylogin (username varchar(200), pass varchar(200))
     returns int
     as $$
 declare
+    v_msg text;
     sellerid bigint;
     
 begin

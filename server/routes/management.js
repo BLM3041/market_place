@@ -21,7 +21,22 @@ router.get("/sellers/:id", async (req, res) => {
     console.error(err.message);
   }
 });
-
+router.get("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await pool.query("SELECT * FROM market_user WHERE seller_id = $1", [
+      id
+    ]);
+    if(user.rowCount){
+      res.json(user.rows[0]);
+    }
+    else{
+      res.status(404).json(`Seller with id = ${id} could not be found`);
+    }
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 // Get all sellers
 router.get('/sellers/', async (req, res) => {

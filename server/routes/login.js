@@ -17,8 +17,14 @@ router.post('/', async (req,res) =>{
             "SELECT * FROM mylogin($1, $2)", 
             [username.toLowerCase(), password]
           );
-        console.log(user)
-        res.json(user)
+        const result = user.rows[0]['mylogin']
+        if(result==-1){
+            res.status(401).json("Login failed. Please check again your information")
+        }
+        else{
+            res.status(200).json("Login successfully")
+        }
+       
     }
     catch(err){
         console.log(err.message)
