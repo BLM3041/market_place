@@ -1,14 +1,19 @@
 <template>
-  <login> </login> 
+  <addSellerPopUp/> 
 </template>
 
 <script>
-import login from './components/login.vue'
-
+//import sellerPage from './components/sellerPage.vue'
+//import statePage from './components/statePage.vue'
+//import products from './components/products.vue'
+//import productOperations from './components/productOperations.vue'
+//import deleteProducts from './components/deleteProducts.vue'
+//import sellerOperations from './components/sellerOperations.vue'
+import addSellerPopUp from './components/addSellerPopUp.vue'
 export default {
   name: 'App',
   components: {
-    login
+    addSellerPopUp
   }
 }
 </script>
@@ -27,11 +32,10 @@ body {
    position: absolute;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 0px;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
 }
+
 </style>
