@@ -1,9 +1,8 @@
 <template>
     <div class="addFrom">    
         <form>
-            <input type="text" id="name" name="name" placeholder="name"><br>
-            <input type="text" id="surname" name="surname" placeholder="surname"><br>
-            <input type="submit" value="Submit" @click="sendToBackend()">
+            <input type="text" id="name" name="name" placeholder="Product Name"><br>
+            <input type="submit" value="OK" @click="sendToBackend()">
         </form>
     </div> 
 </template>
@@ -11,7 +10,7 @@
 <script>
 
 export default{
-    name:'addSellerPopUp',
+    name:'addProductsPopUp',
     methods:{
             sendToBackend: function(){
                 console.log("hey")

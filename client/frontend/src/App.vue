@@ -1,5 +1,5 @@
 <template>
-  <addSellerPopUp/> 
+  <addProductsPopUp/> 
 </template>
 
 <script>
@@ -9,11 +9,14 @@
 //import productOperations from './components/productOperations.vue'
 //import deleteProducts from './components/deleteProducts.vue'
 //import sellerOperations from './components/sellerOperations.vue'
-import addSellerPopUp from './components/addSellerPopUp.vue'
+//import addSellerPopUp from './components/addSellerPopUp.vue'
+//import customerPage from './components/customerPage.vue'
+//import addProducts from './components/addProducts.vue'
+import addProductsPopUp from './components/addProductsPopUp.vue'
 export default {
   name: 'App',
   components: {
-    addSellerPopUp
+    addProductsPopUp
   }
 }
 </script>
