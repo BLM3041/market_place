@@ -390,7 +390,8 @@ end;
 $$
 language 'plpgsql';
 
-create or replace function list_all_products (sellerId int)
+drop function list_all_products () 
+create or replace function list_all_products ()
     returns table (
         productid int,
         productname varchar(200)
@@ -402,14 +403,29 @@ begin
         p.id,
         p.product_name
     from
-        product p,
-        stock s
-    where
-        s.product_id = p.id
-        and s.seller_id = sellerId;
+        product p;
 end;
 $$
 language 'plpgsql';
+
+create or replace function list_one_product (pid int )
+    returns varchar(200)
+    as $$
+declare
+    product varchar(200);
+begin
+    select
+        p.product_name
+    into product
+    from
+        product p
+    where
+        p.id = pid;
+    return product;
+end;
+$$
+language 'plpgsql';
+
 
 create or replace function list_product_stocks (productId int)
     returns table (

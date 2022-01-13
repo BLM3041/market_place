@@ -8,40 +8,44 @@ const router = express.Router();
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await pool.query("SELECT * FROM product WHERE id = $1", [
+    const product = await pool.query("SELECT * FROM list_one_product($1)", [
       id
     ]);
-
+7
     res.json(product.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
 });
+
+
 // Get all products
 router.get('/', async (req, res) => {
   try {
-    const allProducts = await pool.query("SELECT * FROM product");
+    const allProducts = await pool.query("SELECT * FROM list_all_products ()");
     res.json(allProducts.rows);
   } catch (err) {
     console.error(err.message);
   }
 });
 
-// Add Product
+// Add a product
 router.post('/', async (req, res) => {
   try {
-    const { description } = req.body;
+    const { product_name } = req.body;
+    console.log(product_name);
     const newProduct = await pool.query(
-      "INSERT INTO product (description) VALUES($1) RETURNING *",
-      [description]
-    );
-
+      `SELECT * from add_product($1)`,
+      [product_name]);
     res.json(newProduct.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
 });
 
+
+
+/*
 // Delete Product
 router.delete('/:id', async (req, res) => {
   try {
@@ -55,4 +59,6 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+*/
 module.exports = router;

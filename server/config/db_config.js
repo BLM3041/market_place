@@ -7,4 +7,6 @@ const pool = new Pool({
     password: '12345',
     database: 'market_place'
 })
+
+
 module.exports = pool;

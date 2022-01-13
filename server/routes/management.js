@@ -5,7 +5,7 @@ const router = express.Router();
 
 //get a seller
 
-router.get("/:id", async (req, res) => {
+router.get("/sellers/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const seller = await pool.query("SELECT * FROM seller WHERE id = $1", [
@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 // Get all sellers
-router.get('/', async (req, res) => {
+router.get('/sellers/', async (req, res) => {
   try {
     const allSellers = await pool.query("SELECT * FROM seller");
     res.json(allSellers.rows);
@@ -27,13 +27,14 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Add seller
-router.post('/', async (req, res) => {
+// Add a seller
+router.post('/sellers/', async (req, res) => {
   try {
-    const { description } = req.body;
+    const { username, password, loc, fname, surname } = req.body;
+    /**/
     const newSeller = await pool.query(
-      "INSERT INTO seller (description) VALUES($1) RETURNING *",
-      [description]
+      "SELECT * FROM add_user($1, $2, $3 , $4, $5)", 
+      [username, password, loc, fname , surname]
     );
 
     res.json(newSeller.rows[0]);
@@ -43,10 +44,10 @@ router.post('/', async (req, res) => {
 });
 
 // Delete Seller
-router.delete('/:id', async (req, res) => {
+router.delete('/sellers/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteSeller = await pool.query("DELETE FROM seller WHERE id = $1", [
+    const deleteSeller = await pool.query(" SELECT * FROM remove_user ($1) ", [
       id
     ]);
     res.json("seller was deleted!");
