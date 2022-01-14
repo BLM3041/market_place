@@ -395,6 +395,7 @@ language 'plpgsql';
 create or replace function list_stock (sellerId int)
     returns table (
         productid int,
+        productname varchar(200),
         quantity int,
         price real
     )
@@ -403,12 +404,13 @@ begin
     return query
     select
         stock.product_id,
+        product.product_name,
         stock.quantity,
         stock.price
     from
-        stock
+        stock, product
     where
-        stock.seller_id = sellerId;
+        stock.seller_id = sellerId and product.id = stock.product_id;
 end;
 $$
 language 'plpgsql';
