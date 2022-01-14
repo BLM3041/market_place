@@ -391,33 +391,6 @@ begin
 end;
 $$
 language 'plpgsql';
-create or replace function list_all_sales (starting date, ending date)
-    returns table (
-        productid int,
-        sellernumber int,
-        quantity int
-    )
-    as $$
-begin
-    return query
-    select
-        count(distinct sale.seller_id ):: int,
-        sale.product_id,
-        sum(sale.quantity)::int
-    from
-        sale
-    where
-        sale.sale_date >= starting
-        and sale.sale_date <= ending
-    group by
-		sale.product_id
-		
-
-    having
-        sum(sale.quantity) > 0;
-end;
-$$
-language 'plpgsql';
 
 create or replace function list_all_sales (starting date, ending date)
     returns table (
@@ -429,7 +402,7 @@ create or replace function list_all_sales (starting date, ending date)
 begin
     return query
     select
-        count(sale.seller_id),
+        count(distinct sale.seller_id)::int,
         sale.product_id,
         sum(sale.quantity)::int
     from
@@ -674,12 +647,25 @@ end if;
 end
 $do$;
 
+
+/* SELLER PERMISSIONS */
 grant usage on schema public to seller;
 
-grant select on product, location to seller;
+grant select on product, location, stock, sale to seller;
 
-grant execute on function list_available_loc to seller;
-<<<<<<< HEAD
-=======
+grant insert on sale, product, stock to seller;
 
->>>>>>> 40495ad38ad76413898819a5b3e890e508aa1b1e
+grant update on stock to seller;
+
+grant delete on stock to seller;
+
+grant execute on function list_available_loc, list_products_not_in_stock, list_sales_usr, list_stock, list_one_product,
+                         update_quantity, sell, add_product, add_stock, remove_stock to seller;
+
+
+/* VIEWER PERMISSIONS */
+grant usage on schema public to viewer;
+
+grant select on stock, seller, location, product to viewer;
+
+grant execute on function list_all_products, list_product_stocks to viewer;
