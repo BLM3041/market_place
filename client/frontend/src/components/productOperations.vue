@@ -17,7 +17,8 @@ export default{
     .container{
         display: flex;
         align-items: center;
-        justify-content: center; 
+        justify-content: center;
+        height: 100%;
     }
     button{
         width:180px;
@@ -25,7 +26,8 @@ export default{
         font-size: 18px;
         background-color: blue;
         color: white;
-        margin:20px
+        margin:20px;
+        border-radius: 10%;
         
     }
     button:hover{

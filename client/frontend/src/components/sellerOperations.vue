@@ -97,7 +97,9 @@ export default{
         font-size: 18px;
         width:150px;
         height: 50px;
-        background-color: blue
+        background-color: blue;
+        color: white;
+        border-radius: 10%;
     }
     button:hover{
         cursor: pointer;

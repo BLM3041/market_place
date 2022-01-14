@@ -29,7 +29,8 @@ export default{
         font-size: 18px;
         background-color: blue;
         color: white;
-        margin:20px
+        margin:20px;
+        border-radius: 10%;
         
     }
     button:hover{

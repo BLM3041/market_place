@@ -3,15 +3,15 @@
         <caption>PRODUCTS</caption>
         <tbody>
             <tr>
-                something some <img v-bind:src="require('../assets/' + minus)" />
+               <th>something some</th> <th><img v-bind:src="require('../assets/' + minus)" /></th>
             </tr>       
 
             <tr>
-                Anysomething <img v-bind:src="require('../assets/' + minus)" />
+                <th>any</th> <th><img v-bind:src="require('../assets/' + minus)" /></th>
             </tr>
 
             <tr>
-                some <img v-bind:src="require('../assets/' + minus)" />
+                <th>any</th> <th><img v-bind:src="require('../assets/' + minus)" /></th>
             </tr>    
         </tbody>
     </table>
@@ -50,5 +50,8 @@ export default{
     caption{
         font-size: 30px;
         margin: 30px;
+    }
+    th{
+        font-weight: normal;
     }
 </style>
