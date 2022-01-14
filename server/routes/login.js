@@ -29,7 +29,7 @@ router.post('/', async (req,res) =>{
         else{
             res.status(200).json({
                 "test": "Login successfully",
-                "seler_id": result
+                "seller_id": result
             })
         }
        

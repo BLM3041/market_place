@@ -94,7 +94,7 @@ router.delete('/:sellerId/deleteFromStock', async (req, res) => {
 
 
 
-// Delete a product from the stock
+// Update a product in the stock
 router.post('/:sellerId/updateStock', async (req, res) => {
   try {
     const { seller_id } = req.params;
@@ -130,7 +130,7 @@ router.get('/:sellerId/reports/', async (req, res) => {
     console.error(err.message);
   }
 });
-
+//Sell something
 router.post('/:sellerId/sell/', async (req, res) => {
   try {
     const { sellerId } = req.params;
