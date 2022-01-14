@@ -2,18 +2,18 @@
     <div class="addFrom">    
         <form>
             <input type="text" id="name" name="name" placeholder="Product Name"><br>
-            <input type="submit" value="OK" @click="sendToBackend()">
+            <input type="submit" value="OK" @click="AddProduct()">
         </form>
     </div> 
 </template>
 
 <script>
-
+//import axios from 'axios'
 export default{
-    name:'addProductsPopUp',
+    name:'AddProductsPopUp',
     methods:{
-            sendToBackend: function(){
-                console.log("hey")
+            async AddProduct(){
+                
             }
     }
 }

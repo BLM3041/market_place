@@ -20,7 +20,7 @@
 <script>
 
 export default{
-    name:'products',
+    name:'Products',
     data: function() {
         return {
         plus: "plus.png",

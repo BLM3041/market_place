@@ -1,4 +1,5 @@
 <template>
+        <div>
         <div class="container">
             
             <button type="button" class="btn">Daily</button>
@@ -6,12 +7,13 @@
             <button type="button" class="btn">Monthly</button>
         </div>
         <div class="col-8" id="chartdiv"></div>   
+        </div>
 </template>
 
 <script>
 
 export default{
-    name:'reports'
+    name:'Reports'
 }
 </script>
 

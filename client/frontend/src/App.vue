@@ -12,11 +12,11 @@
 //import addSellerPopUp from './components/addSellerPopUp.vue'
 //import customerPage from './components/customerPage.vue'
 //import addProducts from './components/addProducts.vue'
-import addProductsPopUp from './components/addProductsPopUp.vue'
+import AddProductsPopUp from './components/AddProductsPopUp.vue'
 export default {
   name: 'App',
   components: {
-    addProductsPopUp
+    AddProductsPopUp
   }
 }
 </script>

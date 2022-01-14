@@ -20,7 +20,7 @@
 <script>
 
 export default{
-    name:'deleteProducts',
+    name:'DeleteProducts',
     data: function() {
         return {
         minus: "minus.png"

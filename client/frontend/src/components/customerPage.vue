@@ -20,7 +20,7 @@
 <script>
 
 export default{
-    name:'customerPage'
+    name:'CustomerPage'
 
 }
 </script>

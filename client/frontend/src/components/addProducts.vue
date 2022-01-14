@@ -28,7 +28,7 @@
 <script>
 
 export default{
-    name:'addProducts'
+    name:'AddProducts'
 }
 </script>
 

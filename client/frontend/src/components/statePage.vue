@@ -9,7 +9,7 @@
 <script>
 
 export default{
-    name:'statePage'
+    name:'StatePage'
 }
 </script>
 <style scoped>

@@ -11,7 +11,7 @@
 <script>
 
 export default{
-    name:'addSellerPopUp',
+    name:'AddSellerPopUp',
     methods:{
             sendToBackend: function(){
                 console.log("hey")

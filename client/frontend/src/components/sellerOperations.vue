@@ -23,7 +23,7 @@
 <script>
 
 export default{
-    name:'sellerOperations',
+    name:'SellerOperations',
     data: function() {
         return {
         minus: "minus.png"
