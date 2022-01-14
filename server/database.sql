@@ -392,6 +392,33 @@ end;
 $$
 language 'plpgsql';
 
+create or replace function list_all_sales (starting date, ending date)
+    returns table (
+        productid int,
+        sellernumber int,
+        quantity int
+    )
+    as $$
+begin
+    return query
+    select
+        sale.seller_id,
+        sale.product_id,
+        sum(sale.quantity)::int
+    from
+        sale
+    where
+        and sale.sale_date >= starting
+        and sale.sale_date <= ending
+    group by
+        sale.product_id,
+        sale.seller_id
+    having
+        sum(sale.quantity) > 0;
+end;
+$$
+language 'plpgsql';
+
 create or replace function list_stock (sellerId int)
     returns table (
         productid int,
@@ -408,9 +435,11 @@ begin
         stock.quantity,
         stock.price
     from
-        stock, product
+        stock,
+        product
     where
-        stock.seller_id = sellerId and product.id = stock.product_id;
+        stock.seller_id = sellerId
+        and product.id = stock.product_id;
 end;
 $$
 language 'plpgsql';
@@ -591,3 +620,32 @@ end;
 $$
 language 'plpgsql';
 
+/* ROLES */
+
+do $do$
+begin
+    if not exists (
+        select
+            
+        from
+            pg_catalog.pg_roles
+        where
+            rolname = 'seller') then
+    create role seller login password 'XtremelySaf3Pa5sworDs3LLer';
+end if;
+end
+$do$;
+
+do $do$
+begin
+    if not exists (
+        select
+            
+        from
+            pg_catalog.pg_roles
+        where
+            rolname = 'viewer') then
+    create role viewer login password 'typica1PassWorD';
+end if;
+end
+$do$;
