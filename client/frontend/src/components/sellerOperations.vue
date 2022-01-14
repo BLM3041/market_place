@@ -2,18 +2,19 @@
     <div class="container">
     <table className="table">
         <caption>Salesmen</caption>
-        <tbody>
-            <tr>
-                seller1 <img v-bind:src="require('../assets/' + minus)" />
-            </tr>       
-
-            <tr>
-                seller2 <img v-bind:src="require('../assets/' + minus)" />
-            </tr>
-
-            <tr>
-                seller3 <img v-bind:src="require('../assets/' + minus)" />
-            </tr>   
+        <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Location</th>
+        </tr>
+        <tbody v-for = "seller in Allsellers" v-bind:key="seller.sellerid">
+            <tr id ={{seller.sellerid}} >
+                <td>{{seller.fname}}</td>
+                <td>{{seller.lname}}</td> 
+                <td>{{seller.loc}}</td>
+                 <img v-bind:src="require('../assets/' + minus)" />
+            </tr> 
+             
         </tbody>
     </table>
     <button type="button" class="btn" @click="myFunction()">Add Seller</button>
@@ -21,28 +22,25 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 export default{
     name:'SellerOperations',
-    data: 
-    
-    function() {
+    data() {
         return {
-        minus: "minus.png"
+        minus: "minus.png",
+        Allsellers : []
         };
     },
-    methods:{
-        async getAllSellers(){
-            axios
-            .get('/management/sellers')
-            .then(response => (this.info = response.data))
-            .catch(error => console.log(error)) 
-        },
-            myFunction: function(){
-                console.log("hey")
-            }
-        }
+  mounted() {
+      fetch('http://localhost:5000/management/sellers')
+        .then(res => res.json())
+        .then( data => this.Allsellers = data )
+        .catch( err => console.log(err.message))
+       
+  },
+   
 };
+
 </script>
 
 <style scoped>

@@ -1,20 +1,66 @@
 <template>
     <div class="login">    
-        <form>
-            <select name="users" id="usertypes">
+        <form @submit.prevent="handleSubmit()">
+            <select name="users" id="usertypes" v-model="users">
                 <option value="state">State</option>
                 <option value="seller">Seller</option>
             </select><br><br>
-            <input type="text" id="username" name="username" placeholder="Username"><br>
-            <input type="password" id="password" name="password" placeholder="Password"><br><br>
-            <input type="submit" value="Submit">
+            <input type="text" id="username" name="username" placeholder="Username"  v-model="username" required><br>
+            <input type="password" id="password" name="password" placeholder="Password" required v-model="password"><br><br>
+            <input type="submit" value="Submit"  >
         </form>
+
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'Login'
+  name: 'Login',
+  data(){
+      return{
+          users: '',
+          username: '',
+          password: '',
+      }
+  },
+  methods: {
+      async handleSubmit(){
+
+          const data = {
+              username : this.username,
+              password : this.password
+
+          }
+          console.log(data)
+          
+          if(this.users == 'state'){
+              console.log("Belediyem")
+            if(data.username == 'postgres' && data.passwrod == '12345'){
+                console.log("will be routed")
+                let route = this.$router.resolve({ path: "/management" });
+                window.open(route.href);
+            }
+          }
+          else{
+            await axios.post("http://localhost:5000/login", data)
+            .then(res => {
+                console.log(res)
+                let seller_id = res.data.seller_id 
+                if ( seller_id!= -1){
+                    console.log("Successed");
+                }
+                else{
+                    alert("Wrong password or username! please try again ")
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+          }
+      }
+  },
+
 }
 </script>
 <style scoped>
@@ -27,6 +73,12 @@ export default {
         width:170px;
         height: 20px;
     }
-    
+    body {
+    display:flex;
+    }
+    form {
+    display:table;/* shrinks to fit content */
+    margin:auto;
+    }
 
 </style>

@@ -1,27 +1,34 @@
 <template>
     <div class="container">
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
+        <div  v-for = "product in AllProducts" v-bind:key="product.productid">
+            <button type="button" class="btn" @click="seeProductStock(product.productid)"> {{product.productname}} </button>
+        </div>
     </div> 
 </template>
 
 <script>
 
 export default{
-    name:'CustomerPage'
-
+    name:'CustomerPage',
+    data() {
+        return {
+        AllProducts : []
+        };
+    },
+  mounted() {
+      fetch('http://localhost:5000/products')
+        .then(res => res.json())
+        .then( data => this.AllProducts = data )
+        .catch( err => console.log(err.message))
+       
+  },
+  methods: {
+      
+      seeProductStock(productid){
+          console.log(productid)
+          
+      }
+  },
 }
 </script>
 

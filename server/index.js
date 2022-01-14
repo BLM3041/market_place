@@ -25,7 +25,7 @@ app.use('/products', products);
 app.use('/sellers', sellers);
 app.use('/management', management);
 app.use('/browse', browse);
-app.use('/', login);
+app.use('/login', login);
 
 
 // Middlewares for Vue

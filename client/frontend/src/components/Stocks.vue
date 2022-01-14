@@ -1,32 +1,47 @@
 <template>
     <table className="table">
         <caption>Stocks</caption>
-        <tbody>
+        <tr>
+        <th>Product Id</th>
+        <th>Quantity</th>
+        </tr>
+        <tbody v-for = "stock in stocks" v-bind:key="stock.productid">    
             <tr>
-                something some  Quantity: 30 <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
-            </tr>       
-
-            <tr>
-                Anysomething   Quantity: 30  <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
-            </tr>
-
-            <tr>
-                some  Quantity: 30  <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
-            </tr>    
+                <td>{{stock.productid}} </td> 
+                <td>{{stock.quantity}} </td> 
+                <img v-bind:src="require('../assets/' + plus)" /> 
+                <img v-bind:src="require('../assets/' + minus)" />
+                
+            </tr>           
         </tbody>
     </table>
 </template>
+
+
+
 
 <script>
 
 export default{
     name:'Stocks',
-    data: function() {
+    data (){
         return {
         plus: "plus.png",
-        minus: "minus.png"
+        minus: "minus.png",
+        sellerId: 4, 
+        stocks: []
         };
-    }
+    },
+    
+    mounted() {
+        console.log("mounted");
+      fetch(`http://localhost:5000/sellers/4/stocks`)
+        .then(res => res.json())
+        .then( data => this.stocks = data )
+        .catch( err => console.log(err.message))
+       
+  },
+  
 };
 </script>
 

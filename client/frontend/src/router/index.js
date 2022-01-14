@@ -6,12 +6,22 @@ Vue.use(VueRouter);
 
 import {createRouter, createWebHistory} from "vue-router"
 
-
-import Login from "../components/Login.vue"
-import Stocks from "../components/Stocks.vue"
+/*Mamangement pages*/
 import SellerOperations from "../components/SellerOperations.vue"
 import StatePage from "../components/StatePage.vue"
 import Reports from "../components/Reports.vue"
+
+/*Saler Pages*/
+import Login from "../components/Login.vue"
+import Stocks from "../components/Stocks.vue"
+import ProductOperations from "../components/ProductOperations.vue"
+import AddProducts from "../components/AddProducts.vue" 
+import DeleteProducts from "../components/DeleteProducts.vue" 
+import SellerPage from "../components/SellerPage.vue"
+
+/*Customer Pages*/
+import CustomerPage from "../components/CustomerPage.vue"
+
 
 
 
@@ -22,9 +32,34 @@ const routes = [
     component: Login
   },
   {
+    path: "/sellers",
+    name: "SellerPage",
+    component: SellerPage
+  },
+  {
+    path: "/sellers/sellerid/products",
+    name: "ProductOperations",
+    component: ProductOperations
+  },
+  {
     path: "/stocks",
     name: "Stocks",
     component: Stocks
+  },
+  {
+    path: "/sellers/sellerid/addProduct",
+    name: "addProduct",
+    component: AddProducts
+  },
+  {
+    path: "/sellers/sellerid/DeleteProducts",
+    name: "DeleteProducts",
+    component: DeleteProducts
+  },
+  {
+    path: "/home",
+    name: "CustomerPage",
+    component: CustomerPage
   },
   {
     path: "/management/sellers",

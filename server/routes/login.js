@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 
 router.post('/', async (req,res) =>{
     try{
+        console.log(req.body);
         const { username, password} = req.body;
         /*const pass1 = await bcrypt.hash("112233", 10)
         const pass2 = await bcrypt.hash("112233", 10)
@@ -20,10 +21,16 @@ router.post('/', async (req,res) =>{
         console.log(user)
         const result = user.rows[0]['mylogin']
         if(result==-1){
-            res.status(401).json("Login failed. Please check again your information")
+            res.status(401).json({
+                "test": "Login failed. Please check again your information",
+                "seller_id": -1
+            })
         }
         else{
-            res.status(200).json("Login successfully")
+            res.status(200).json({
+                "test": "Login successfully",
+                "seler_id": result
+            })
         }
        
     }
