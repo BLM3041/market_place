@@ -27,7 +27,7 @@ export default {
       }
   },
   methods: {
-       handleSubmit(){
+      async handleSubmit(){
 
           const data = {
               username : this.username,
@@ -40,21 +40,20 @@ export default {
               console.log("Belediyem")
             if(data.username == 'postgres' && data.password == '12345'){
                 console.log("will be routed")
-                this.$router.push('/management')
+                window.location.href = "http://localhost:8080/management";
             }
             else{
                  alert("Wrong password or username! please try again ")
             }
           }
           else{
-             axios.post("http://localhost:5000/login", data)
+            await axios.post("http://localhost:5000/login", data)
             .then(res => {
                 console.log(res)
                 let seller_id = res.data.seller_id 
-
-                if ( seller_id != -1){
+                if ( seller_id!= -1){
                     console.log("Successed");
-                     this.$router.push(`/sellers/${seller_id}`);
+                     window.location.href = "http://localhost:8080/sellers";
                 }
                 else{
                     alert("Wrong password or username! please try again ")

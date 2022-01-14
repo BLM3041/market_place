@@ -1,21 +1,16 @@
 <template>
         <div class="container">
             
-            <router-link :to="{name : 'SallerReports', params: {sellerid : this.sellerId}}" ><button type="button" class="btn">Reports</button> </router-link>
-            <router-link :to="{name : 'ProductOperations', params: {sellerid : this.sellerId}}"><button type="button" class="btn">Product Operations</button></router-link>
-            <router-link :to="{name : 'Stocks', params: {sellerid : this.sellerId}}" ><button type="button" class="btn">Sale Operations</button></router-link>
+            <router-link to="/sellers/sellerid/reports" ><button type="button" class="btn">Reports</button> </router-link>
+            <router-link to="/sellers/sellerid/products" ><button type="button" class="btn">Product Operations</button></router-link>
+            <router-link to="/sellers/sellerid/stocks" ><button type="button" class="btn">Sale Operations</button></router-link>
         </div>   
 </template>
 
 <script>
 
 export default{
-    name:'SellerPage',
-    data(){
-        return{
-            sellerId : this.$route.params.sellerid
-        }
-    }
+    name:'SellerPage'
 }
 </script>
 
