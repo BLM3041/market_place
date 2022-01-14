@@ -402,17 +402,16 @@ create or replace function list_all_sales (starting date, ending date)
 begin
     return query
     select
-        sale.seller_id,
+        count(sale.seller_id),
         sale.product_id,
         sum(sale.quantity)::int
     from
         sale
     where
-        and sale.sale_date >= starting
+        sale.sale_date >= starting
         and sale.sale_date <= ending
     group by
-        sale.product_id,
-        sale.seller_id
+        sale.product_id
     having
         sum(sale.quantity) > 0;
 end;
@@ -620,13 +619,12 @@ end;
 $$
 language 'plpgsql';
 
-/* ROLES */
 
+/* ROLES */
 do $do$
 begin
     if not exists (
         select
-            
         from
             pg_catalog.pg_roles
         where
@@ -640,7 +638,6 @@ do $do$
 begin
     if not exists (
         select
-            
         from
             pg_catalog.pg_roles
         where
@@ -649,3 +646,10 @@ begin
 end if;
 end
 $do$;
+
+grant usage on schema public to seller;
+
+grant select on product, location to seller;
+
+grant execute on function list_available_loc to seller;
+
