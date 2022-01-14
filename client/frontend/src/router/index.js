@@ -1,8 +1,4 @@
-/*import Vue from "vue";
-import VueRouter from "vue-router";
 
-Vue.use(VueRouter);
-*/
 
 import {createRouter, createWebHistory} from "vue-router"
 
@@ -32,38 +28,13 @@ const routes = [
     component: Login
   },
   {
-    path: "/sellers",
-    name: "SellerPage",
-    component: SellerPage
-  },
-  {
-    path: "/sellers/sellerid/products",
-    name: "ProductOperations",
-    component: ProductOperations
-  },
-  {
-    path: "/sellers/sellerid/stocks",
-    name: "Stocks",
-    component: Stocks
-  },
-  {
-    path: "/sellers/sellerid/addProduct",
-    name: "addProduct",
-    component: AddProducts
-  },
-  {
-    path: "/sellers/sellerid/DeleteProducts",
-    name: "DeleteProducts",
-    component: DeleteProducts
-  },
-  {
     path: "/home",
     name: "CustomerPage",
     component: CustomerPage
   },
   {
     path: "/management/sellers",
-    name: "Seller Operations",
+    name: "SellerOperations",
     component: SellerOperations
   },
   {
@@ -77,29 +48,39 @@ const routes = [
     component: Reports
   },
   {
-    path: "/sellers/sellerid/reports",
+    path: "/sellers/:sellerid",
+    name: "SellerPage",
+    component: SellerPage
+  },
+  {
+    path: "/sellers/:sellerid/products",
+    name: "ProductOperations",
+    component: ProductOperations
+  },
+  {
+    path: "/sellers/:sellerid/stocks",
+    name: "Stocks",
+    component: Stocks
+  },
+  {
+    path: "/sellers/:sellerid/addProduct",
+    name: "addProduct",
+    component: AddProducts
+  },
+  {
+    path: "/sellers/:sellerid/DeleteProducts",
+    name: "DeleteProducts",
+    component: DeleteProducts
+  },
+ 
+  {
+    path: "/sellers/:sellerid/reports",
     name: "SallerReports",
     component: Reports
   },
-  /*
-  {
-    path: "/browse",
-    name: "User View",
-    component: () =>
-      import("../components/student/StatePage.vue"),
-  },
-  */
  
 ];
 
-/*
-
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes,
-});
-*/
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
