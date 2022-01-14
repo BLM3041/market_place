@@ -1,5 +1,5 @@
 <template>
-  <addProductsPopUp/> 
+      <router-view></router-view>
 </template>
 
 <script>
@@ -12,12 +12,16 @@
 //import addSellerPopUp from './components/addSellerPopUp.vue'
 //import customerPage from './components/customerPage.vue'
 //import addProducts from './components/addProducts.vue'
-import AddProductsPopUp from './components/AddProductsPopUp.vue'
+//import AddProductsPopUp from './components/AddProductsPopUp.vue'
 export default {
   name: 'App',
+  data: () => ({
+    //
+  }),
+  /*
   components: {
     AddProductsPopUp
-  }
+  }*/
 }
 </script>
 

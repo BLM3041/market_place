@@ -1,34 +1,45 @@
-import Vue from "vue";
+/*import Vue from "vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
+*/
+
+import {createRouter, createWebHistory} from "vue-router"
+
+
+import Login from "../components/Login.vue"
+import Stocks from "../components/Stocks.vue"
+import SellerOperations from "../components/SellerOperations.vue"
+import StatePage from "../components/StatePage.vue"
+import Reports from "../components/Reports.vue"
+
+
 
 const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () =>
-      import("../components/Login.vue"),
+    component: Login
   },
   {
-    path: "/products",
-    name: "Products",
-    component: () =>
-      import("../components/Products.vue"),
+    path: "/stocks",
+    name: "Stocks",
+    component: Stocks
   },
   {
-    path: "/sellers",
+    path: "/management/sellers",
     name: "Seller Operations",
-    component: () =>
-      import("../components/SellerOperations.vue"),
+    component: SellerOperations
   },
   {
     path: "/management",
     name: "State Page ",
-    component: () =>
-      import(
-        "../components/StatePage.vue"
-      ),
+    component: StatePage
+  },
+  {
+    path: "/management/reports",
+    name: "Reports",
+    component: Reports
   },
   /*
   {
@@ -41,10 +52,19 @@ const routes = [
  
 ];
 
+/*
+
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
 });
+*/
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+}
+  
+)
 
 export default router;

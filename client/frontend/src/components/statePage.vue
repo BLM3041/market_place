@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Seller Oparetions</button>
+            <router-link to="/management/reports" ><button type="button" class="btn">Reports</button> </router-link>
+            <router-link to="/management/sellers" > <button type="button" class="btn">Seller Oparetions</button></router-link>
     </div> 
     
 </template>
@@ -10,6 +10,7 @@
 
 export default{
     name:'StatePage'
+
 }
 </script>
 <style scoped>

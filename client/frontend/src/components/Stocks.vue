@@ -1,6 +1,6 @@
 <template>
     <table className="table">
-        <caption>PRODUCTS</caption>
+        <caption>Stocks</caption>
         <tbody>
             <tr>
                 something some  Quantity: 30 <img v-bind:src="require('../assets/' + plus)" /> <img v-bind:src="require('../assets/' + minus)" />
@@ -20,7 +20,7 @@
 <script>
 
 export default{
-    name:'Products',
+    name:'Stocks',
     data: function() {
         return {
         plus: "plus.png",

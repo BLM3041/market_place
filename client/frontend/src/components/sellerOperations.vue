@@ -21,15 +21,23 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default{
     name:'SellerOperations',
-    data: function() {
+    data: 
+    
+    function() {
         return {
         minus: "minus.png"
         };
     },
     methods:{
+        async getAllSellers(){
+            axios
+            .get('/management/sellers')
+            .then(response => (this.info = response.data))
+            .catch(error => console.log(error)) 
+        },
             myFunction: function(){
                 console.log("hey")
             }
