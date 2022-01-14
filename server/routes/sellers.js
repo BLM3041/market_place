@@ -97,9 +97,11 @@ router.delete('/:sellerId/deleteFromStock', async (req, res) => {
 // Update a product in the stock
 router.post('/:sellerId/updateStock', async (req, res) => {
   try {
-    const { seller_id } = req.params;
+    const seller_id = req.body.sellerId;
     const product_id = req.body.product_id;
     const quantity = req.body.quantity;
+    console.log(req.body)
+    console.log(seller_id)
     const updateStock = await pool.query("SELECT * FROM update_quantity ($1 , $2, $3 ) ", [
       seller_id, product_id, quantity
     ]);
@@ -133,7 +135,7 @@ router.get('/:sellerId/reports/', async (req, res) => {
 //Sell something
 router.post('/:sellerId/sell/', async (req, res) => {
   try {
-    const { sellerId } = req.params;
+    const sellerId = req.body.sellerId;
     const product_id = req.body.product_id;
     const quantity = req.body.quantity;
     const sold = await pool.query("SELECT * FROM sell($1,$2,$3)", 

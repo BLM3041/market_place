@@ -68,14 +68,14 @@ const routes = [
     component: AddProducts
   },
   {
-    path: "/sellers/:sellerid/DeleteProducts",
+    path: "/sellers/:sellerid/products/DeleteProducts",
     name: "DeleteProducts",
     component: DeleteProducts
   },
  
   {
     path: "/sellers/:sellerid/reports",
-    name: "SallerReports",
+    name: "SellerReports",
     component: Reports
   },
  

@@ -2,15 +2,21 @@
     <table className="table">
         <caption>Stocks</caption>
         <tr>
-        <th>Product Id</th>
+        <th>Product Name</th>
         <th>Quantity</th>
         </tr>
         <tbody v-for = "stock in stocks" v-bind:key="stock.productid">    
             <tr>
-                <td>{{stock.productid}} </td> 
+                <td>{{stock.productname}} </td> 
                 <td>{{stock.quantity}} </td> 
-                <img v-bind:src="require('../assets/' + plus)" /> 
-                <img v-bind:src="require('../assets/' + minus)" />
+                <td>
+                <label for = 'add'> </label>
+                <input type='number' id='add' name= 'add' v-model="add"><img @click="addQuantity(stock.productid)"  v-bind:src="require('../assets/' + plus)" />
+                </td>
+                <td>
+                <label for = 'minus'> </label>
+                <input type='number' id='minus' name= 'minus'  v-model="remove">  <img @click="DeleteQuantity(stock.productid)" v-bind:src="require('../assets/' + minus)" />
+                </td>
                 
             </tr>           
         </tbody>
@@ -21,25 +27,69 @@
 
 
 <script>
-
+import axios from 'axios'
 export default{
     name:'Stocks',
     data (){
         return {
+        Sid : this.$route.params.sellerid,
+        add: null,
+        remove: null,
         plus: "plus.png",
         minus: "minus.png",
-        sellerId: 4, 
         stocks: []
         };
     },
     
     mounted() {
         console.log("mounted");
-      fetch(`http://localhost:5000/sellers/4/stocks`)
+      fetch(`http://localhost:5000/sellers/${this.Sid}/stocks`)
         .then(res => res.json())
         .then( data => this.stocks = data )
         .catch( err => console.log(err.message))
        
+  },
+  methods: {
+      addQuantity(productid){
+
+          const info ={
+            sellerId: this.Sid,
+            product_id : productid,
+            quantity : this.add
+          }
+          console.log(info)
+          axios.post(`http://localhost:5000/sellers/${this.Sid}/updateStock`, info).
+          then(
+            res =>{
+                console.log(res)
+
+            }
+          )
+          .catch(
+              err =>
+          console.log(err.message)
+          )
+      },
+      DeleteQuantity(productid){
+         const info ={
+            sellerId: this.Sid,
+            product_id : productid,
+            quantity : this.remove 
+          }
+          console.log(info)
+          axios.post(`http://localhost:5000/sellers/${this.Sid}/sell`, info).
+          then(
+            res =>{
+                console.log(res)
+
+            }
+          )
+          .catch(
+              err =>
+          console.log(err.message)
+          )
+      }
+
   },
   
 };

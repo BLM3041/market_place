@@ -1,7 +1,7 @@
 <template>
         <div class="container">
             
-            <router-link :to="{name : 'SallerReports', params: {sellerid : this.sellerId}}" ><button type="button" class="btn">Reports</button> </router-link>
+            <router-link :to="{name : 'SellerReports', params: {sellerid : this.sellerId}}" ><button type="button" class="btn">Reports</button> </router-link>
             <router-link :to="{name : 'ProductOperations', params: {sellerid : this.sellerId}}"><button type="button" class="btn">Product Operations</button></router-link>
             <router-link :to="{name : 'Stocks', params: {sellerid : this.sellerId}}" ><button type="button" class="btn">Sale Operations</button></router-link>
         </div>   
