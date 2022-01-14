@@ -2,7 +2,7 @@
     <div class="login">    
         <form @submit.prevent="handleSubmit()">
             <select name="users" id="usertypes" v-model="users">
-                <option value="state">State</option>
+                <option value="city">City</option>
                 <option value="seller">Seller</option>
             </select><br><br>
             <input type="text" id="username" name="username" placeholder="Username"  v-model="username" required><br>
@@ -34,7 +34,7 @@ export default {
           }
           console.log(data)
           
-          if(this.users == 'state'){
+          if(this.users == 'city'){
               console.log("Belediyem")
             if(data.username == 'postgres' && data.password == '12345'){
                 console.log("will be routed")

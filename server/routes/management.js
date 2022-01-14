@@ -76,10 +76,10 @@ router.delete('/sellers/:id', async (req, res) => {
     ]);
     const result= deleteSeller.rows[0]['remove_user']
     if(result == -1){
-      res.status(404).json("This user does not exist")
+      res.status(404).json({seller_id : result , message: "This user does not exist"})
     }
     else{
-      res.status(200).json("User was successfully deleted")
+      res.status(200).json({seller_id : result , message: "User was successfully deleted"})
     }
   } catch (err) {
     console.log(err.message);

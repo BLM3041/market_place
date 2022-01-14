@@ -28,7 +28,7 @@ export default{
         }
     },
      methods: {
-      async handleSubmit(){
+       handleSubmit(){
          
           const data = {
               username : this.username,
@@ -39,19 +39,24 @@ export default{
 
           }
           console.log(data)
-            await axios.post("http://localhost:5000/management/sellers", data)
+             axios.post("http://localhost:5000/management/sellers", data)
             .then(res => {
                 console.log(res)
                 let seller_id = res.data.seller_id 
                 if ( seller_id!= -1){
                     console.log("Successfully Added");
+                    alert("User was successfully added");
+                    location.reload();
+
 
                 }
                 else{
+                    alert("username already exists or location reserved! please try again ")
                     alert(res.data.message)
                 }
             })
             .catch(err => {
+                alert("username already exists or location reserved! please try again ")
                 console.log(err.message);
             })
       }

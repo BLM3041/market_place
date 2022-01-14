@@ -12,7 +12,7 @@
                 <td>{{seller.fname}}</td>
                 <td>{{seller.lname}}</td> 
                 <td>{{seller.loc}}</td>
-                 <img v-bind:src="require('../assets/' + minus)" />
+                <td @click="DeleteSeller(seller.sellerid)" > <img v-bind:src="require('../assets/' + minus)" /> </td>
             </tr> 
              
         </tbody>
@@ -28,6 +28,7 @@
 <script>
 import AddSellerPopUp from './AddSellerPopUp.vue';
 import { ref } from 'vue';
+import axios from 'axios';
 export default{
     setup () {
 		const popupTriggers = ref({
@@ -59,6 +60,29 @@ export default{
         .then( data => this.Allsellers = data )
         .catch( err => console.log(err.message))
        
+  },
+  methods: {
+      DeleteSeller(sellerid){
+          console.log(sellerid)
+          axios.delete(`http://localhost:5000/management/sellers/${sellerid}`)
+          .then(res => {
+              console.log(res)
+              let seller_id = res.data.seller_id
+              if ( seller_id!= -1){
+                    console.log("Successfully Removed");
+                    alert("User was successfully removed");
+                    location.reload();
+                }
+                else{
+                    alert("User does not exist! please try again ")
+                    alert(res.data.message)
+                }
+          }
+           
+
+          )
+          .catch(err => console.log(err.message))
+      }
   },
    
 };
