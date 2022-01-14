@@ -1,9 +1,9 @@
 <template>
         <div class="container">
             
-            <button type="button" class="btn">Reports</button>
-            <button type="button" class="btn">Product Operations</button>
-            <button type="button" class="btn">Sale Operations</button>
+            <router-link to="/sellers/sellerid/reports" ><button type="button" class="btn">Reports</button> </router-link>
+            <router-link to="/sellers/sellerid/products" ><button type="button" class="btn">Product Operations</button></router-link>
+            <router-link to="/sellers/sellerid/stocks" ><button type="button" class="btn">Sale Operations</button></router-link>
         </div>   
 </template>
 

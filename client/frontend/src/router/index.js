@@ -42,7 +42,7 @@ const routes = [
     component: ProductOperations
   },
   {
-    path: "/stocks",
+    path: "/sellers/sellerid/stocks",
     name: "Stocks",
     component: Stocks
   },
@@ -74,6 +74,11 @@ const routes = [
   {
     path: "/management/reports",
     name: "Reports",
+    component: Reports
+  },
+  {
+    path: "/sellers/sellerid/reports",
+    name: "SallerReports",
     component: Reports
   },
   /*

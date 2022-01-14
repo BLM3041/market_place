@@ -36,10 +36,12 @@ export default {
           
           if(this.users == 'state'){
               console.log("Belediyem")
-            if(data.username == 'postgres' && data.passwrod == '12345'){
+            if(data.username == 'postgres' && data.password == '12345'){
                 console.log("will be routed")
-                let route = this.$router.resolve({ path: "/management" });
-                window.open(route.href);
+                window.location.href = "http://localhost:8080/management";
+            }
+            else{
+                 alert("Wrong password or username! please try again ")
             }
           }
           else{
@@ -49,6 +51,7 @@ export default {
                 let seller_id = res.data.seller_id 
                 if ( seller_id!= -1){
                     console.log("Successed");
+                     window.location.href = "http://localhost:8080/sellers";
                 }
                 else{
                     alert("Wrong password or username! please try again ")
@@ -56,6 +59,7 @@ export default {
             })
             .catch(err => {
                 console.log(err.message);
+                alert("Wrong password or username! please try again ")
             })
           }
       }

@@ -419,31 +419,6 @@ end;
 $$
 language 'plpgsql';
 
-create or replace function list_all_sales (starting date, ending date)
-    returns table (
-        productid int,
-        sellernumber int,
-        quantity int
-    )
-    as $$
-begin
-    return query
-    select
-        count(sale.seller_id),
-        sale.product_id,
-        sum(sale.quantity)::int
-    from
-        sale
-    where
-        sale.sale_date >= starting
-        and sale.sale_date <= ending
-    group by
-        sale.product_id
-    having
-        sum(sale.quantity) > 0;
-end;
-$$
-language 'plpgsql';
 
 create or replace function list_stock (sellerId int)
     returns table (

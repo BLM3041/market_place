@@ -17,14 +17,36 @@
              
         </tbody>
     </table>
-    <button type="button" class="btn" @click="myFunction()">Add Seller</button>
+    <button type="button" class="btn" @click="() => TogglePopup('buttonTrigger')" >Add Seller</button>
+    <AddSellerPopUp 
+			v-if="popupTriggers.buttonTrigger" 
+			:TogglePopup="() => TogglePopup('buttonTrigger')">
+	</AddSellerPopUp>
     </div>
 </template>
 
 <script>
-//import axios from 'axios'
+import AddSellerPopUp from './AddSellerPopUp.vue';
+import { ref } from 'vue';
 export default{
+    setup () {
+		const popupTriggers = ref({
+			buttonTrigger: false,
+		});
+		const TogglePopup = (trigger) => {
+			popupTriggers.value[trigger] = !popupTriggers.value[trigger]
+		}
+		setTimeout(() => {
+			popupTriggers.value.timedTrigger = true;
+		}, 3000);
+		return {
+			AddSellerPopUp,
+			popupTriggers,
+			TogglePopup
+		}
+	},
     name:'SellerOperations',
+    components: {AddSellerPopUp},
     data() {
         return {
         minus: "minus.png",
