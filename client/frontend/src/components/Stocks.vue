@@ -62,12 +62,12 @@ export default{
           then(
             res =>{
                 console.log(res)
-
+                location.reload();
             }
           )
           .catch(
               err =>
-          console.log(err.message)
+              console.log(err.message)
           )
       },
       DeleteQuantity(productid){
@@ -81,12 +81,21 @@ export default{
           then(
             res =>{
                 console.log(res)
-
+                if(res.data.sold_id == null || res.data.sold_id== -1){
+                    alert("Stock is dropped under 0")
+                }
+                else{
+                    location.reload();
+                }
+                
             }
           )
           .catch(
-              err =>
-          console.log(err.message)
+              err =>{
+                  console.log(err.message)
+                  alert("Stock is dropped under 0")
+              }
+                
           )
       }
 

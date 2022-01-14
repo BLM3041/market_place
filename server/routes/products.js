@@ -38,17 +38,17 @@ router.get('/', async (req, res) => {
 // Add a product
 router.post('/', async (req, res) => {
   try {
-    const { product_name } = req.body;
+    const product_name  = req.body.product_name;
     const newProduct = await pool.query(
       `SELECT * from add_product($1)`,
       [product_name.toLowerCase()]);
     console.log( [newProduct.rows[0]])
     new_id = [newProduct.rows[0]['productid']]
     if( new_id == -1){
-        res.status(409).json("Product already exists")
+        res.status(409).json({id: new_id, "message": "Product already exists"})
     }
     else{
-      res.status(200).json(`Product was successfully added with id: ${new_id}`);
+      res.status(200).json({id: new_id, "message":`Product was successfully added with id: ${new_id}`});
     }
     
   } catch (err) {

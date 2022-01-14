@@ -41,7 +41,7 @@ router.get('/:sellerId/productsNotInStock', async (req, res) => {
 /**********************************************Check it ************************************************** */
 /**Does not give warning for negative senario */
 router.post('/:sellerId/addStock', async (req, res) => {
-  const { sellerId } = req.params;
+  const sellerId = req.params.sellerId;
   const product_id = req.body.product_id;
   const quantity = req.body.quantity;
   const price = req.body.price;
@@ -69,23 +69,23 @@ router.post('/:sellerId/addStock', async (req, res) => {
 
 
 // Delete a product from the stock
-router.delete('/:sellerId/deleteFromStock', async (req, res) => {
+router.post('/:sellerId/deleteFromStock', async (req, res) => {
   try {
-    const { seller_id } = req.params;
-    const { product_id } = req.body;
+    const  seller_id = req.params.sellerId;
+    const product_id = req.body.product_id;
+    console.log(seller_id, product_id)
     const deleteFromStock = await pool.query("SELECT * FROM remove_stock ($1 , $2 ) ", [
       seller_id, product_id
     ]);
-    const deleted = deleteFromStock.rows[0]
     console.log(deleteFromStock)
     res.status(200).json(`Product was successfully deleted from stock`);
-    /*new_id = [deleteFromStock.rows[0]['productid']]
+    new_id = [deleteFromStock.rows[0]['remove_stock']]
     if( new_id == -1){
-        res.status(409).json("Product already exists")
+        res.status(409).json({deleted: new_id, message: "Product could not be deleted"})
     }
     else{
-      res.status(200).json(`Product was successfully added with id: ${new_id}`);
-    }*/
+      res.status(200).json({deleted: new_id, message: "Product was successfully deleted"});
+    }
   } catch (err) {
     console.log(err.message);
   }
@@ -141,7 +141,15 @@ router.post('/:sellerId/sell/', async (req, res) => {
     const sold = await pool.query("SELECT * FROM sell($1,$2,$3)", 
     [sellerId, product_id, quantity]);
     console.log(sold)
+    const result  = [sold.rows[0]['sell']]
+    if(result == -1){
+      res.status(409).json({sold_id : result , message: "Stock is dropped under zero"})
+    }
+    else{
+      res.status(200).json({sold_id : result , message: "Product was successfully updated"})
+    }
     res.json(sold.rows);
+
   } catch (err) {
     console.error(err.message);
   }

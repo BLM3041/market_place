@@ -1,34 +1,106 @@
 <template>
     <div class="container">
-        <table className="table">
-            <caption>Products</caption>
-            <tbody>
-                <tr>
-                    product1 
-                </tr>       
-
-                <tr>
-                    product2
-                </tr>
-
-                <tr>
-                    product3
-                </tr>   
-            </tbody><br>
-            <button type="button" class="btn" @click="myFunction()">Add New Product</button>
-        </table><br>
-            <form action="">
-                <input type="text" id="quantity" name="quantity" placeholder="Quantity"><br><br>
-                <input type="text" id="price" name="price" placeholder="Price"><br><br>
-                <input type="submit" value="OK">
+            <h1>Products</h1>
+            <form @submit.prevent="handleSubmit()">
+                <label for="product">Choose a product:</label>
+                <select name="product" id="product" v-model="product" >
+                    <option v-for = "product in AllProducts" v-bind:key="product.product_id" :value="`${product.product_id}`">{{product.product_name}}</option>
+                </select>
+                <br><br>
+                <input type="text" id="quantity" name="quantity" placeholder="Quantity" v-model="quantity"><br><br>
+                <input type="text" id="price" name="price" placeholder="Price" v-model="price"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+            <p>Not in the list? </p>
+            <form @submit.prevent="handleAddNew()">
+            <input type="text" id="product_name" name="product_name" placeholder="product name" v-model="product_name"><br><br>
+            <input type="submit" value="Add New Product">
             </form>
     </div>
 </template>
 
 <script>
-
+import axios from 'axios'
 export default{
-    name:'AddProducts'
+    name:'AddProducts',
+    
+    data(){
+        return{
+            AllProducts : [],
+            sellerId : this.$route.params.sellerid,
+            product: null,
+            quantity: null,
+            price: null,
+            product_name: ''
+        }
+    },
+    mounted() {
+      fetch(`http://localhost:5000/sellers/${this.sellerId}/productsNotInStock`)
+        .then(res => res.json())
+        .then( data =>{ 
+            this.AllProducts = data
+            console.log(data)
+            
+            }
+             )
+        .catch( err => console.log(err.message))
+       
+  },
+  methods: {
+      handleSubmit(){
+
+          const data = {
+              product_id : this.product,
+              quantity : this.quantity,
+              price : this.price
+          }
+          console.log("this is our", data)
+          axios.post(`http://localhost:5000/sellers/${this.sellerId}/addStock`, data)
+            .then(res => {
+                console.log(res)
+                let seller_id = res.data.seller_id 
+
+                if ( seller_id != -1){
+                    console.log("Successed");
+                    alert("Product successfully added ")
+                     this.$router.push(`/sellers/${this.sellerId}/products`);
+                }
+                else{
+                    alert("Error Occurred! please try again ")
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+                alert("Error Occurred! please try again ")
+            })
+          },
+          handleAddNew(){
+
+          const data = {
+              product_name : this.product_name,
+          }
+          console.log("this is our ", data)
+          axios.post(`http://localhost:5000/products`, data)
+            .then(res => {
+                console.log(res)
+                let pid = res.data.id 
+
+                if ( pid != -1){
+                    console.log("Successed");
+                    alert("Product successfully added to the list. Please choose it and specify the other fields ")
+                     location.reload();
+                }
+                else{
+                    alert("Error: Product already exists ")
+                }
+            })
+            .catch(err => {
+                console.log(err.message);
+                alert("Error Occurred! please try again ")
+            })
+          }
+      
+      }
 }
 </script>
 
