@@ -63,7 +63,7 @@ const routes = [
     component: Stocks
   },
   {
-    path: "/sellers/:sellerid/addProduct",
+    path: "/sellers/:sellerid/products/addProduct",
     name: "addProduct",
     component: AddProducts
   },
