@@ -21,7 +21,7 @@ import MonthlyReports from "../components/MonthlyReports"
 
 /*Customer Pages*/
 import CustomerPage from "../components/CustomerPage.vue"
-
+import StockForUser from "../components/StockForUser.vue"
 
 
 
@@ -35,6 +35,11 @@ const routes = [
     path: "/home",
     name: "CustomerPage",
     component: CustomerPage
+  },
+  {
+    path: "/home/:productId",
+    name: "StockForUser",
+    component: StockForUser
   },
   {
     path: "/management/sellers",

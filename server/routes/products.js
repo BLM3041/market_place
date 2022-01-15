@@ -79,7 +79,8 @@ router.delete('/:id', async (req, res) => {
 // Get all stocks of a product 
 router.get('/stocks/:id/', async (req, res) => {
   try {
-    const { id } = req.params;
+    console.log(req.params)
+    const id= req.params.id;
     console.log(id)
     const allProducts = await pool.query("SELECT * FROM list_product_stocks ($1)",[
       id

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div  v-for = "product in AllProducts" v-bind:key="product.productid">
-            <button type="button" class="btn" @click="seeProductStock(product.productid)"> {{product.productname}} </button>
+            <router-link :to="{name : 'StockForUser', params: {productId: product.productid}}" ><button type="button" class="btn" @click="seeProductStock(product.productid)"> {{product.productname}} </button></router-link>
         </div>
     </div> 
 </template>
