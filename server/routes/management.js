@@ -116,5 +116,18 @@ router.get('/users/', async (req, res) => {
 
 
 
+// Get reports
+router.post('/reports/', async (req, res) => {
+  try {
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    console.log(req)
+    const reports = await pool.query("SELECT * FROM list_all_sales($1,$2)", 
+    [startDate, endDate]);
+    res.json(reports.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 module.exports = router;

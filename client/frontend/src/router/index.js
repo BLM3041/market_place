@@ -5,7 +5,10 @@ import {createRouter, createWebHistory} from "vue-router"
 /*Mamangement pages*/
 import SellerOperations from "../components/SellerOperations.vue"
 import StatePage from "../components/StatePage.vue"
-import Reports from "../components/Reports.vue"
+import ReportsBelediye from "../components/ReportsBelediye"
+import CityReportsMonthly from "../components/CityReportsMonthly"
+import CityReportsDaily from "../components/CityReportsDaily"
+import CityReportsWeekly from "../components/CityReportsWeekly"
 
 /*Saler Pages*/
 import Login from "../components/Login.vue"
@@ -14,6 +17,7 @@ import ProductOperations from "../components/ProductOperations.vue"
 import AddProducts from "../components/AddProducts.vue" 
 import DeleteProducts from "../components/DeleteProducts.vue" 
 import SellerPage from "../components/SellerPage.vue"
+import Reports from "../components/Reports.vue"
 
 import DailyReports from "../components/DailyReports"
 import WeeklyReports from "../components/WeeklyReports"
@@ -47,9 +51,29 @@ const routes = [
     component: SellerOperations
   },
   {
+    path: "/management/CityReportsDaily",
+    name: "CityReportsDaily",
+    component: CityReportsDaily
+  },
+  {
+    path: "/management/CityReportsWeekly",
+    name: "CityReportsWeekly",
+    component: CityReportsWeekly
+  },
+  {
+    path: "/management/CityReportsMonthly",
+    name: "CityReportsMonthly",
+    component: CityReportsMonthly
+  },
+  {
     path: "/management",
     name: "State Page ",
     component: StatePage
+  },
+  {
+    path: "/management/reports",
+    name: "ReportsBelediye",
+    component: ReportsBelediye
   },
   {
     path: "/management/reports",
