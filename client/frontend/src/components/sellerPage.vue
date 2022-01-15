@@ -32,9 +32,10 @@ export default{
         width:180px;
         height:180px;
         font-size: 18px;
-        background-color: blue;
+        background-color: rgb(125, 125, 236);
         color: white;
-        margin:20px
+        margin:20px;
+        border-radius: 10%;
         
     }
     button:hover{

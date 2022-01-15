@@ -1,37 +1,49 @@
 <template>
-        <div>
+        <div class="reports">
         <div class="container">
             
-            <button type="button" class="btn">Daily</button>
-            <button type="button" class="btn">Weekly</button>
-            <button type="button" class="btn">Monthly</button>
+           <router-link :to="{name : 'SellerReportsDaily', params: {sellerid : this.sellerId}}" > <button type="button" class="btn">Daily</button> </router-link>
+            <router-link :to="{name : 'SellerReportsWeekly', params: {sellerid : this.sellerId}}" > <button type="button" class="btn">Weekly</button> </router-link>
+            <router-link :to="{name : 'SellerReportsMonthly', params: {sellerid : this.sellerId}}" >  <button type="button" class="btn">Monthly</button> </router-link>
+
+            <div class="col-8" id="chartdiv"></div>   
         </div>
-        <div class="col-8" id="chartdiv"></div>   
         </div>
 </template>
 
 <script>
 
 export default{
-    name:'Reports'
+    name:'Reports',
+    data(){
+        return{
+            sellerId : this.$route.params.sellerid,
+
+        }
+    }
 }
 </script>
 
 <style scoped>
+    .reports{
+        margin: 0px;
+        height: 100%;
+        width: 100%;
+    }
     .container{
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
     }
 
     button{
         width:180px;
         height:180px;
         font-size: 18px;
-        background-color: blue;
+        background-color: rgb(89, 89, 211);
         color: white;
-        margin:20px
+        margin:20px;
+        border-radius: 10%;
         
     }
     button:hover{

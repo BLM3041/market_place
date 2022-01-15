@@ -1,5 +1,6 @@
 <template>
-    <div class="login">    
+    <div class="login" :style="{'background-image': 'url(' + require('../assets/' + background) + ')'}">
+        <div class="container">     
         <form @submit.prevent="handleSubmit()">
             <select name="users" id="usertypes" v-model="users">
                 <option value="city">City</option>
@@ -9,7 +10,7 @@
             <input type="password" id="password" name="password" placeholder="Password" required v-model="password"><br><br>
             <input type="submit" value="Submit"  >
         </form>
-
+        </div>
     </div>
 </template>
 
@@ -22,6 +23,7 @@ export default {
           users: '',
           username: '',
           password: '',
+          background: 'background.png'
       }
   },
   methods: {
@@ -72,7 +74,8 @@ export default {
     .login{
         margin: 0px;
         height: 100%;
-        width: 100%;  
+        width: 100%; 
+        background-size: cover; 
     }
     select{
         width:170px;
@@ -81,9 +84,35 @@ export default {
     body {
     display:flex;
     }
-    form {
-    display:table;/* shrinks to fit content */
+    #submit{
+        border-radius: 10%;
+        margin-left:55px;
+        height: 30px;
+        font-size: 15px;
+    }
+    #submit:hover{
+        cursor: pointer;
+    }
+    .container{
     margin:auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 380px;
+    height: 330px;
+    background-color: rgb(141, 177, 182);
+    border-radius: 10%;
+    opacity:0.8;
+    }
+    form{
+        position: relative;
+        top: 80px;
+        left: 105px;
+    }
+    input{
+        margin-bottom: 10px;
     }
 
 </style>

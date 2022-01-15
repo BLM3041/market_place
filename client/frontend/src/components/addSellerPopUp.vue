@@ -96,4 +96,8 @@ export default{
 	justify-content: center;
 	
 }
+.popup-inner{
+    background: #FFF;
+		padding: 32px;
+}
 </style>

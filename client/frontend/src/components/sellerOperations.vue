@@ -1,7 +1,7 @@
 <template>
     <div class="container">
     <table className="table">
-        <caption>Salesmen</caption>
+        <caption>Sellers</caption>
         <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -89,6 +89,7 @@ export default{
 
 </script>
 
+
 <style scoped>
     img{
         width:23px;
@@ -97,6 +98,23 @@ export default{
     }
     img:hover{
         cursor: pointer;
+    }
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        margin:auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 500px;
+    height: 100%;
+    background-color: rgb(141, 177, 182);
+    opacity:0.8;
     }
     tr{
         font-size: 24px;
@@ -121,7 +139,9 @@ export default{
         font-size: 18px;
         width:150px;
         height: 50px;
-        background-color: blue
+        background-color: rgb(123, 123, 241);
+        color: white;
+        border-radius: 10%;
     }
     button:hover{
         cursor: pointer;

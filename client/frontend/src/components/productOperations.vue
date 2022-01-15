@@ -1,13 +1,18 @@
 <template>
     <div class="container">
-            <div  v-for = "product in AllProducts" v-bind:key="product.productid">
-                <li type="button" class="btn"> {{product.productname}} </li><button type="button" class="btn" @click="DeleteProduct(product.productid)" >Delete Product</button>
-            </div>
-            <br>
-            <router-link :to="{name : 'addProduct', params: {sellerid : this.sellerId}}" ><button type="button">Add Product</button></router-link>
-            
-    </div> 
-    
+    <table className="table">
+        <caption>PRODUCTS</caption>
+        <tbody>
+        <div>
+                <tr  v-for = "product in AllProducts" v-bind:key="product.productid">
+                    <th type="button"> {{product.productname}} </th><button type="button" class="btn" @click="DeleteProduct(product.productid)" >Delete Product</button>
+                </tr>
+                <br>
+                <router-link :to="{name : 'addProduct', params: {sellerid : this.sellerId}}" ><button class="btn-add" type="button">Add Product</button></router-link>        
+        </div> 
+    </tbody>
+    </table>
+    </div>
 </template>
 
 <script>
@@ -64,18 +69,58 @@ export default{
     .container{
         display: flex;
         align-items: center;
-        justify-content: center; 
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        margin:auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 500px;
+    height: 100%;
+    background-color: rgb(141, 177, 182);
+    opacity:0.8;
     }
-    button{
-        width:50px;
-        height:50px;
-        font-size: 11px;
-        background-color: blue;
-        color: white;
-        margin:20px
-        
+    img{
+        width:23px;
+        height:23px;
+        margin-left:5px;
     }
-    button:hover{
+    img:hover{
         cursor: pointer;
+    }
+    tr{
+        font-size: 24px;
+    }
+    table{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    caption{
+        font-size: 30px;
+        margin: 30px;
+    }
+    th{
+        font-weight: normal;
+    }
+    .btn{
+        background-color:rgb(199, 75, 71);
+        color: white;
+        width:80px;
+        height:50px;
+        margin: 20px;
+        border-radius: 10%;
+    }
+    .btn-add{
+        background-color:rgb(81, 199, 71);
+        color: white;
+        width:80px;
+        height:50px;
+        margin: 20px;
+        border-radius: 10%;
     }
 </style>

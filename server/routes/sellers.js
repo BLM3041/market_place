@@ -51,7 +51,8 @@ router.post('/:sellerId/addStock', async (req, res) => {
       `SELECT * FROM add_stock ($1, $2, $3, $4)`,
       [sellerId, product_id, quantity, price ]);
     console.log( [newStock])
-    res.status(200).json(`Product was successfully added`)
+    res.status(200).json({product:  [newStock.rows[0]['productid']],
+  message: `Product was successfully added`})
     /*new_id = [newStock.rows[0]['productid']]
     if( new_id == -1){
         res.status(409).json("Product already exists")
@@ -125,7 +126,7 @@ router.get('/:sellerId/reports/', async (req, res) => {
     const { seller_id } = req.params;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
-    const reports = await pool.query("SELECT * FROM list_sales_usr($1,$2,$3)", 
+    const reports = await pool.query("SELECT * FROM list_sales_usr($1,$2 ::date ,$3 :: date)", 
     [seller_id, startDate, endDate]);
     res.json(reports.rows);
   } catch (err) {

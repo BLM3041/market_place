@@ -15,6 +15,10 @@ import AddProducts from "../components/AddProducts.vue"
 import DeleteProducts from "../components/DeleteProducts.vue" 
 import SellerPage from "../components/SellerPage.vue"
 
+import DailyReports from "../components/DailyReports"
+import WeeklyReports from "../components/WeeklyReports"
+import MonthlyReports from "../components/MonthlyReports"
+
 /*Customer Pages*/
 import CustomerPage from "../components/CustomerPage.vue"
 
@@ -77,6 +81,21 @@ const routes = [
     path: "/sellers/:sellerid/reports",
     name: "SellerReports",
     component: Reports
+  },
+  {
+    path: "/sellers/:sellerid/reports/daily",
+    name: "SellerReportsDaily",
+    component: DailyReports
+  },
+  {
+    path: "/sellers/:sellerid/reports/monthly",
+    name: "SellerReportsMonthly",
+    component: MonthlyReports
+  },
+  {
+    path: "/sellers/:sellerid/reports/weekly",
+    name: "SellerReportsWeekly",
+    component: WeeklyReports
   },
  
 ];

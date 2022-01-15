@@ -58,9 +58,9 @@ export default{
           axios.post(`http://localhost:5000/sellers/${this.sellerId}/addStock`, data)
             .then(res => {
                 console.log(res)
-                let seller_id = res.data.seller_id 
+                let pid = res.data.product 
 
-                if ( seller_id != -1){
+                if ( pid != null &&  pid != -1){
                     console.log("Successed");
                     alert("Product successfully added ")
                      this.$router.push(`/sellers/${this.sellerId}/products`);
@@ -105,7 +105,7 @@ export default{
 </script>
 
 <style scoped>
-    tr{
+     tr{
         font-size: 24px;
     }
     table{
@@ -117,20 +117,51 @@ export default{
     caption{
         font-size: 30px;
         margin: 30px;
+        margin-bottom: 30px;
     }
     .container{
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        height: 100%;
+        margin:auto;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 500px;
+    height: 100%;
+    background-color: rgb(141, 177, 182);
+    opacity:0.8;
     }
     button{
         font-size: 18px;
         width:150px;
         height: 50px;
-        background-color: blue
+        background-color: blue;
+        color: white;
+        border-radius: 7%;
     }
     button:hover{
+        cursor: pointer;
+    }
+    img{
+        width:23px;
+        height:23px;
+        margin-left:5px;
+    }
+    img:hover{
+        cursor: pointer;
+    }
+    #submit{
+        border-radius: 10%;
+        margin-left:66px;
+        height: 30px;
+        font-size: 15px;
+    }
+    #submit:hover{
         cursor: pointer;
     }
 </style>
