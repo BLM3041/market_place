@@ -28,6 +28,7 @@ router.get('/sellers/', async (req, res) => {
   try {
     const allSellers = await pool.query("SELECT * FROM list_sellers()");
     res.json(allSellers.rows);
+    console.log(allSellers)
   } catch (err) {
     console.error(err.message);
   }

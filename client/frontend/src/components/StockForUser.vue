@@ -1,18 +1,13 @@
 <template>
     <table className="table">
         <caption>Stocks</caption>
-        <tr>
-        <th>Seller Name</th>
-        <th>location</th>
-        <th>Quantity</th>
-        <th>price</th>
-        </tr>
+
         <tbody v-for = "stock in stocks" v-bind:key="stock.loc">    
             <tr>
-                <td>{{stock.sellername}} </td> 
-                <td>{{stock.loc}} </td>
-                <td>{{stock.quantity}} </td> 
-                <td>{{stock.price}} </td> 
+                <td><b>Seller Name:</b> {{stock.sellername}} </td> 
+                <td> <b>Location: </b>{{stock.loc}} </td>
+                <td> <b>Quantity: </b>{{stock.quantity}} </td> 
+                <td><b>Price:</b>{{stock.price}} </td> 
                 <td></td>
                 
             </tr>           
@@ -70,8 +65,12 @@ export default{
         justify-content: center;
         flex-direction: column;
     }
+
     caption{
         font-size: 30px;
         margin: 30px;
+    }
+    td{
+        padding-right: 20px;
     }
 </style>
