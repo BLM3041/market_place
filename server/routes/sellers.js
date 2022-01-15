@@ -121,12 +121,13 @@ router.post('/:sellerId/updateStock', async (req, res) => {
 
 
 // Get reports
-router.get('/:sellerId/reports/', async (req, res) => {
+router.post('/:sellerId/reports/', async (req, res) => {
   try {
-    const { seller_id } = req.params;
+    const seller_id = req.params.sellerId;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
-    const reports = await pool.query("SELECT * FROM list_sales_usr($1,$2 ::date ,$3 :: date)", 
+    console.log(req)
+    const reports = await pool.query("SELECT * FROM list_sales_usr($1,$2 ,$3)", 
     [seller_id, startDate, endDate]);
     res.json(reports.rows);
   } catch (err) {

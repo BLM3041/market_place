@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <div  v-for = "sale in AllSales" v-bind:key="sale.productid">
-            <button type="button" class="btn" @click="seeProductStock(product.productid)"> {{product.productname}} </button>
-        </div>
+        <ul  v-for = "sale in AllSales" v-bind:key="sale.productid">
+            <li> {{sale.productid}}: {{sale.quantity}} </li>
+        </ul>
     </div> 
 </template>
 
 <script>
-
+import axios from 'axios'
 export default{
     name:'WeeklyReports',
     data() {
@@ -25,16 +25,18 @@ export default{
             today = yyyy + '-' + mm + '-' + dd;
             var dd1 = dd-7;
             let before = yyyy + '-' + mm + '-' + dd1;
-            console.log(today)
-            console.log(before)
             const info = {
-                startDate:today, 
-                 endDate: before
-
+                startDate:before , 
+                 endDate: today
             }
-      fetch(`http://localhost:5000/sellers/${this.sellerId}/reports`,info)
-        .then(res => res.json())
-        .then( data => this.AllSales = data )
+            console.log(info)
+      axios.post(`http://localhost:5000/sellers/${this.sellerId}/reports`, info)
+     
+        .then(res => {
+            console.log(res)
+            this.AllSales = res.data
+            console.log("sales are:", this.AllSales)
+            })
         .catch( err => console.log(err.message))
        
   },
