@@ -2,6 +2,7 @@
     <div class="container">
             <router-link to="/management/reports" ><button type="button" class="btn">Reports</button> </router-link>
             <router-link to="/management/sellers" > <button type="button" class="btn">Seller Oparetions</button></router-link>
+            
     </div> 
     
 </template>
