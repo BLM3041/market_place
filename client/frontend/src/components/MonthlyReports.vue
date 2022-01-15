@@ -1,12 +1,16 @@
 <template>
     <div class="container">
-        <div  v-for = "sale in AllSales" v-bind:key="sale.productid">
-            <button type="button" class="btn" @click="seeProductStock(product.productid)"> {{product.productname}} </button>
-        </div>
+        <div class="chart" ref="chartdiv"> </div>
     </div> 
 </template>
 
 <script>
+import axios from 'axios'
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+
+am4core.useTheme(am4themes_animated);
 
 export default{
     name:'MonthlyReports',
@@ -17,29 +21,80 @@ export default{
         };
     },
   mounted() {
-      fetch(`http://localhost:5000/sellers/${this.sellerId}/reports`)
-        .then(res => res.json())
-        .then( data => this.AllProducts = data )
+     
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            var mm1
+            var yyyy1
+            if(mm==1){
+                mm1= 12
+                yyyy1= yyyy-1; 
+            }
+            else{
+                mm1 = mm-1;
+                yyyy1 = yyyy
+            }
+             
+            let before = yyyy1 + '-' + mm1 + '-' + dd;
+            const info = {
+                startDate:before , 
+                 endDate: today
+            }
+            console.log(info)
+      axios.post(`http://localhost:5000/sellers/${this.sellerId}/reports`, info)
+     
+        .then(res => {
+            console.log(res)
+            this.AllSales = res.data
+            console.log("sales are:", this.AllSales)
+            })
+        .then( () =>{
+            let chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart);
+
+    chart.paddingRight = 20;
+
+    chart.data = this.AllSales;
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "productid";
+    categoryAxis.title.text = "Products";
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Quantities sold";
+
+
+    let series = chart.series.push(new am4charts.ColumnSeries());
+    series.name = "Sales";
+    series.columns.template.tooltipText = "Series: {name}\nCategory: {categoryX}\nValue: {valueY}";
+    series.columns.template.fill = am4core.color("#104547"); // fill
+    series.dataFields.valueY = "quantity";
+    series.dataFields.categoryX = "productid";
+
+    this.chart = chart;
+    
+        }
+                
+        )
         .catch( err => console.log(err.message))
+
+    
+  },
+
+  beforeUnmount() {
+    if (this.chart) {
+      this.chart.dispose();
+    }
        
   },
 }
 </script>
 
 <style scoped>
-    .container{
-        display: inline-block;
-    }
-    button{
-        width:180px;
-        height:180px;
-        font-size: 18px;
-        background-color: blue;
-        color: white;
-        margin:20px
-        
-    }
-    button:hover{
-        cursor: pointer;
+    
+    .chart{
+        width: 800px;
+        height: 400px;
+        margin: auto;
     }
 </style>
